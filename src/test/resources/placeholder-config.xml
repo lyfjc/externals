@@ -9,6 +9,7 @@
   <context:property-placeholder
     location="com/soundsystem/app.properties" />
 
+  <!--属性占位符-->
   <bean class="com.soundsystem.BlankDisc"
     c:_0 = "${disc.title}"
     c:_1 = "${disc.artist}"/>

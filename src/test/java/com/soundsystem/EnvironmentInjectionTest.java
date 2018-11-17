@@ -26,6 +26,20 @@ public class EnvironmentInjectionTest {
     }
     
   }
+  @RunWith(SpringJUnit4ClassRunner.class)
+  @ContextConfiguration(classes=EnvironmentAutoConfig.class)
+  public static class AutoInjectFromProperties {
+
+    @Autowired
+    private BlankAutoDisc blankDisc;
+
+    @Test
+    public void assertBlankDiscProperties() {
+      assertEquals("The Beatles", blankDisc.getArtist());
+      assertEquals("Sgt. Peppers Lonely Hearts Club Band", blankDisc.getTitle());
+    }
+
+  }
   
   @RunWith(SpringJUnit4ClassRunner.class)
   @ContextConfiguration(classes=EnvironmentConfigWithDefaults.class)
@@ -46,6 +60,7 @@ public class EnvironmentInjectionTest {
   
     @Test(expected=BeanCreationException.class)
     public void assertBlankDiscProperties() {
+      //通过注解类获取的context，bean创建失败时会报出上面的expected异常
       new AnnotationConfigApplicationContext(EnvironmentConfigWithRequiredProperties.class);
     }
     
